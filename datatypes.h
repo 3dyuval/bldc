@@ -720,6 +720,7 @@ typedef struct {
 	uint32_t update_rate_hz;
 	float coast_brake_level;
 	float coast_brake_ramp_time;
+	bool brake_throttle_mod_invert;
 } adc_config;
 
 // Nunchuk control types

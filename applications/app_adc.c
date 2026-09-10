@@ -361,9 +361,15 @@ static THD_FUNCTION(adc_thread, arg) {
 			pwr -= brake;
 			break;
 
-		case ADC_CTRL_TYPE_CURRENT_REV_BUTTON_BRAKE_ADC:
-			pwr -= brake;
+		case ADC_CTRL_TYPE_CURRENT_REV_BUTTON_BRAKE_ADC: {
+			if (!config.brake_throttle_mod_invert) {
+				// throttle reduces regen as you pull it
+				pwr -= brake;
+			} else {
+				pwr = pwr * -brake;
+			}
 			break;
+		}
 
 		case ADC_CTRL_TYPE_CURRENT_REV_BUTTON:
 		case ADC_CTRL_TYPE_CURRENT_NOREV_BRAKE_BUTTON:
